@@ -12,11 +12,8 @@ import SpinnerExample from "./spinner";
 import TableExample from "./table";
 import TabsExample from "./tabs";
 import ToastExample from "./toasts";
-<<<<<<< Updated upstream
 import Home from "./Home";
-=======
 import SignUp from "./signup";
->>>>>>> Stashed changes
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode
