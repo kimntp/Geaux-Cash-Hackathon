@@ -12,10 +12,12 @@ import SpinnerExample from "./spinner";
 import TableExample from "./table";
 import TabsExample from "./tabs";
 import ToastExample from "./toasts";
+import Home from "./Home";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode
 	>
+    <Home/>
 		<BasicExample/>
 		<TypesExample/>
 		<CloseButtonExample />

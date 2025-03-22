@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Person } from "./types";
-import "./App.css";
+import "./App.module.css";
 
 const AVATAR_1 =
   "/images/img_avatar_lf92vl.png";

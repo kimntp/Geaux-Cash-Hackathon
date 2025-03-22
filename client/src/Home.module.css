@@ -1,11 +1,13 @@
-.navBar{
+.navBar {
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.logo{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+    align-items: center;  /* Vertically center items */
+    justify-content: center; /* Horizontally center items */
+    gap: 10px; /* Optional: Adds space between text and image */
+    height: 10px; /* Adjust as needed */
+    background-color: lightgray; /* Just for visibility */
+  }
+  
+  .logo {
+    width: 5px; /* Adjust size as needed */
+    height: auto;
+  }

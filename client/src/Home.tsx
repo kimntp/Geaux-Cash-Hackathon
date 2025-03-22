@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from "react";
 import "./Home.module.css";
-import { getImageUrl } from './utils';
+
 
 const brand_logo =
   "/images/logo.png";
