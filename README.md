@@ -1,6 +1,6 @@
 # What is this?
 
-This project is a template for a fullstack web app using [Axum](https://github.com/tokio-rs/axum) as the backend in Rust, and React with [Vite](https://vitejs.dev/) for the frontend.
+This project is based on a template for a fullstack web app using [Axum](https://github.com/tokio-rs/axum) as the backend in Rust, and React with [Vite](https://vitejs.dev/) for the frontend with the intention of making a financial application in 24 hours (intermittent).
 
 It is intended as a teaching tool, a complete copy of the blog post that it was created for is included further down in this README.
 
@@ -27,7 +27,7 @@ Once both are running you can access the app on [http://localhost:5173/]()
 
 The complete tutorial on how this project was built follows below:
 
-# Contents 
+# Contents
 
 1. [Motivation](#motivation)
 1. [Project Setup](#project-setup)
@@ -45,7 +45,7 @@ We'll also be taking advantage of the Typescript type generating tool we built i
 
 # Project Setup
 
-If you're following along after completing the previous tutorial, then I suggest you create your app in a folder right next to your type generation CLI so that you can easily invoke it without dealing with painful file paths.  
+If you're following along after completing the previous tutorial, then I suggest you create your app in a folder right next to your type generation CLI so that you can easily invoke it without dealing with painful file paths.
 
 Alternatively if you published it, you can install the utility with `cargo install`, or simply install the demo one I created for the tutorial with `cargo install typester`.
 
@@ -76,11 +76,11 @@ tower-http = { version = "0.3.4", features = ["cors"] }
 
 In addition to `axum` for the web server, which is built on `tokio`, we also use `tower-http` to simplify CORS.
 
-We will be using `serde` and `serde_json` for serialization of our Rust data to send to the frontend.  
+We will be using `serde` and `serde_json` for serialization of our Rust data to send to the frontend.
 
 # Rust Server
 
-Begin by opening up `main.rs` and replacing it with this simple template for a web server with returns _"Hello, world!"_ at the root route: 
+Begin by opening up `main.rs` and replacing it with this simple template for a web server with returns _"Hello, world!"_ at the root route:
 
 
 `fullstack-app/src/main.rs`
@@ -129,7 +129,7 @@ cargo run
 
 You should be able to visit [http://localhost:3000]() and see the _**"Hello, World!"**_ response from your root route.
 
-Once you have that working we'll add a route that returns some serialized Rust data. 
+Once you have that working we'll add a route that returns some serialized Rust data.
 
 First we'll create a second file in `src` called `types.rs` similar to how we did in the Typester project.
 
@@ -149,7 +149,7 @@ pub struct Person {
 
 We're going to keep it fairly simple for this demonstration, just a basic struct. You can add more complex types later if you like.
 
-Now let's update our server code to include a GET route that returns a serialized vector of Person structs. 
+Now let's update our server code to include a GET route that returns a serialized vector of Person structs.
 
 When this is deserialized in Typescript the front end should expect to receive an array of Person objects.
 
@@ -320,7 +320,7 @@ export interface Person {
 }
 ```
 
-With this type file in place you should no longer see any error in your `App.tsx` file and `person` should be correctly typed and identifiable as a `Person` by your IDE for type checking and intellisense.  
+With this type file in place you should no longer see any error in your `App.tsx` file and `person` should be correctly typed and identifiable as a `Person` by your IDE for type checking and intellisense.
 
 Here's a look at how VS Code will interpret it:
 
@@ -371,7 +371,7 @@ import "./App.css";
 
 const AVATAR_1 =
   "https://res.cloudinary.com/dqse2txyi/image/upload/v1666049372/axum_server/img_avatar_lf92vl.png";
-  
+
 const AVATAR_2 =
   "https://res.cloudinary.com/dqse2txyi/image/upload/v1666049372/axum_server/img_avatar2_erqray.png";
 
