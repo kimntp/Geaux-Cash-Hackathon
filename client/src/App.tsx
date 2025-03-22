@@ -3,10 +3,10 @@ import { Person } from "./types";
 import "./App.css";
 
 const AVATAR_1 =
-  "https://res.cloudinary.com/dqse2txyi/image/upload/v1666049372/axum_server/img_avatar_lf92vl.png";
+  "/images/img_avatar_lf92vl.png";
 
 const AVATAR_2 =
-  "https://res.cloudinary.com/dqse2txyi/image/upload/v1666049372/axum_server/img_avatar2_erqray.png";
+  "/images/img_avatar2_erqray.png";
 
 function App() {
   const [people, setPeople] = useState<Person[]>([]);
