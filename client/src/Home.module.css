@@ -1,13 +1,25 @@
-.navBar {
-    display: flex;
-    align-items: center;  /* Vertically center items */
-    justify-content: center; /* Horizontally center items */
-    gap: 10px; /* Optional: Adds space between text and image */
-    height: 10px; /* Adjust as needed */
-    background-color: lightgray; /* Just for visibility */
+.container{
+  background-color: #E4E6D9;
+  padding: 40px;
+  max-width: auto;
+  margin: auto;
+  border-radius: 8px;
+}
+ 
+ .logo {
+    display: block;
+  margin: 0 auto; /* Centers the image */
+  width: 700px; /* Adjust as needed */
+  height: auto;
+   
   }
-  
-  .logo {
-    width: 5px; /* Adjust size as needed */
-    height: auto;
-  }
+  .mainText{
+    font-family: "Roboto";
+    color: #494442;
+    font-size: 25px;
+    }
+    .subText{
+    font-family: "Roboto";
+    color: black;
+    font-size: 20px;
+    }
