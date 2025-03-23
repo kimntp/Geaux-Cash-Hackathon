@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styles from "./signup.module.css";
+import { useNavigate } from "react-router-dom";
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,18 +17,27 @@ const SignUp: React.FC = () => {
         return;
     }
 
-		// Do a POST request on our binded port.
-    const response = await fetch('http://localhost:3000/signup', {
-				method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-				// We want to send some JSON.
-        body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email, password: password }),
+  try {
+    // Do a POST request to the backend
+    const response = await fetch("http://localhost:3000/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ first_name: firstName, last_name: lastName, email, password }),
     });
+
     const data = await response.text();
-    console.log("[BACKEND]: " + data); // Handle the response from the server
-	};
+    console.log("[BACKEND]: " + data); // Handle server response
+
+    if (response.ok) {
+      navigate("/quest"); // Navigate ONLY if request is successful
+    } else {
+      alert("Signup failed. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("An error occurred. Please try again.");
+  }
+};
 
 	return (
     <div className={styles.container} id ="signup">
@@ -72,7 +83,7 @@ const SignUp: React.FC = () => {
             required
             className={styles.input}
         />
-        <button type="submit" className={styles.button}>Sign Up</button>
+        <button type="submit" className={styles.button} >Sign Up</button>
       </form>
     </div>
   );
