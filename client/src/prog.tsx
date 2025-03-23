@@ -1,97 +1,106 @@
 import React, { useState, useEffect } from "react";
 import styles from "./prog.module.css";
 
+const CHALLENGE_IDEAS = [
+  "Stop wasting $5 on liquid regret.",
+  "Quit burning cash on takeout.",
+  "Ditch the deadweight subscriptions.",
+  "Walk, don’t whine about gas.",
+  "Sell your junk, you're not a dragon."
+];
+
 const ProgPage: React.FC = () => {
-    const [moneyGoal, setMoneyGoal] = useState<number>(0);
-    const [targetDate, setTargetDate] = useState<string>('');
-    const [dailySavings, setDailySavings] = useState<number>(0);
-    const [progress, setProgress] = useState<number>(0); // To track progress
-    const [remainingAmount, setRemainingAmount] = useState<number>(0);
-    const [daysRemaining, setDaysRemaining] = useState<number>(0);
+  const [moneyGoal, setMoneyGoal] = useState<number>(1000);
+  const [dailySavings, setDailySavings] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0);
+  const [remainingAmount, setRemainingAmount] = useState<number>(1000);
 
-    // Assuming the goal and date were sent as query params or from session state
-    useEffect(() => {
-        // Replace these with actual values, possibly from the backend or props.
-        const savedGoal = 1000;  // Example goal, replace with actual data from backend
-        const savedDate = "2025-05-01";  // Example target date, replace with actual
-        setMoneyGoal(savedGoal);
-        setTargetDate(savedDate);
+  // Initialize state from localStorage
+  useEffect(() => {
+    const savedGoal = Number(localStorage.getItem('moneyGoal')) || 1000;
+    const savedDaily = Number(localStorage.getItem('dailySavings')) || 0;
+   
+    setMoneyGoal(savedGoal);
+    setDailySavings(savedDaily);
+    updateProgress(savedDaily, savedGoal);
+  }, []);
 
-        // Calculate the number of days remaining
-        const today = new Date();
-        const target = new Date(savedDate);
-        const daysLeft = Math.ceil((target.getTime() - today.getTime()) / (1000 * 3600 * 24));
-        setDaysRemaining(daysLeft);
-        
-        // Calculate how much is remaining to be saved
-        const remaining = savedGoal - dailySavings * daysLeft;
-        setRemainingAmount(remaining > 0 ? remaining : 0); // Ensure non-negative remaining amount
+  // Update localStorage when dailySavings changes
+  useEffect(() => {
+    localStorage.setItem('dailySavings', dailySavings.toString());
+  }, [dailySavings]);
 
-    }, [moneyGoal, targetDate, dailySavings]);
+  const updateProgress = (currentSavings: number, goal: number) => {
+    const newProgress = (currentSavings / goal) * 100;
+    const newRemaining = goal - currentSavings;
 
-    const handleDailySavingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const dailyInput = parseFloat(e.target.value);
-        setDailySavings(dailyInput);
-        // Recalculate the progress and remaining amount
-        const totalSaved = dailyInput * daysRemaining;
-        setProgress((totalSaved / moneyGoal) * 100); // Calculate progress as a percentage
-        setRemainingAmount(moneyGoal - totalSaved);
-    };
+    setProgress(Math.min(newProgress, 100));
+    setRemainingAmount(Math.max(newRemaining, 0));
+  };
 
-    const generateChallengeIdeas = () => {
-        return [
-            "Skip that daily coffee purchase and save $5.",
-            "Pack your lunch instead of eating out.",
-            "Cut down on subscriptions you don't need.",
-            "Consider walking or biking instead of driving to save on gas.",
-            "Sell unused items around the house."
-        ];
-    };
+  const handleDailySavingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Math.max(0, parseFloat(e.target.value) || 0);
+    setDailySavings(value);
+    updateProgress(value, moneyGoal);
+  };
 
-    return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>Your Savings Progress</h1>
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>Your Savings Progress</h1>
 
-            {/* Progress Bar */}
-            <div className={styles.progressContainer}>
-                <label className={styles.progressLabel}>Progress:</label>
-                <div className={styles.progressBarBackground}>
-                    <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
-                </div>
-                <p className={styles.progressText}>{Math.round(progress)}% complete</p>
-            </div>
-
-            {/* Daily Savings Input */}
-            <div className={styles.dailySavingsContainer}>
-                <label className={styles.subtitle} htmlFor="dailySavings">How much can you save today?</label>
-                <input
-                    type="number"
-                    id="dailySavings"
-                    placeholder="Enter your daily savings amount"
-                    onChange={handleDailySavingsChange}
-                    className={styles.input}
-                    value={dailySavings || ""}
-                    min="0"
-                />
-            </div>
-
-            {/* Daily Savings Challenge Ideas */}
-            <div className={styles.challengeContainer}>
-                <h3 className={styles.subtitle}>Daily Savings Challenge Ideas</h3>
-                <ul>
-                    {generateChallengeIdeas().map((idea, index) => (
-                        <li key={index}>{idea}</li>
-                    ))}
-                </ul>
-            </div>
-
-            {/* Remaining Amount */}
-            <div className={styles.remainingContainer}>
-                <h3 className={styles.subtitle}>Remaining Amount: ${remainingAmount.toFixed(2)}</h3>
-                <h4 className={styles.subtitle}>Days Remaining: {daysRemaining}</h4>
-            </div>
+      {/* Progress Bar */}
+      <div className={styles.progressContainer}>
+        <label className={styles.progressLabel}>Progress:</label>
+        <div className={styles.progressBarBackground}>
+          <div
+            className={styles.progressBar}
+            style={{ width: `${Math.min(progress, 100)}%` }}
+          ></div>
         </div>
-    );
+        <p className={styles.progressText}>
+          {Math.round(progress)}% complete
+        </p>
+      </div>
+
+      {/* Daily Savings Input */}
+      <div className={styles.dailySavingsContainer}>
+        <label className={styles.subtitle} htmlFor="dailySavings">
+          How much can you save today?
+        </label>
+        <input
+          type="number"
+          id="dailySavings"
+          placeholder="Enter your daily savings amount"
+          onChange={handleDailySavingsChange}
+          className={styles.input}
+          value={dailySavings}
+          min="0"
+          step="1"
+        />
+      </div>
+
+      {/* Daily Savings Challenge Ideas */}
+      <div className={styles.challengeContainer}>
+        <h3 className={styles.subtitle}>Daily Savings Challenge Ideas</h3>
+        <ul>
+          {CHALLENGE_IDEAS.map((idea, index) => (
+            <li key={index}>{idea}</li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Remaining Amount */}
+      <div className={styles.remainingContainer}>
+        <h3 className={styles.subtitle}>
+          {remainingAmount > 0 ? (
+            `Remaining Amount: $${remainingAmount.toFixed(2)}`
+          ) : (
+            <span className={styles.successMessage}>Goal Achieved! 🎉</span>
+          )}
+        </h3>
+      </div>
+    </div>
+  );
 };
 
 export default ProgPage;
