@@ -8,16 +8,27 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    // Handle sign up logic here
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
+	const handleSubmit = async (event: React.FormEvent) => {
+		event.preventDefault();
+    if (password !== confirmPassword) {
+        alert("Passwords do not match! Please try again.");
+        return;
+    }
 
-  return (
+		// Do a POST request on our binded port.
+    const response = await fetch('http://localhost:3000/signup', {
+				method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+				// We want to send some JSON.
+        body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email, password: password }),
+    });
+    const data = await response.text();
+    console.log("[BACKEND]: " + data); // Handle the response from the server
+	};
+
+	return (
     <div className={styles.container} id ="signup">
       <h1 className={styles.title}>Let’s get this over with.</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -65,6 +76,5 @@ const SignUp: React.FC = () => {
       </form>
     </div>
   );
-};
-
+}
 export default SignUp;

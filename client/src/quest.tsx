@@ -15,25 +15,38 @@ const QuestPage: React.FC = () => {
         setDateAnswer(e.target.value);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Handle form submission logic here
-        console.log('Text Answer:', textAnswer);
-        console.log('Date Answer:', dateAnswer);
-    };
+		const handleSubmit = async (event: React.FormEvent) => {
+			event.preventDefault();
+
+			// Do a POST request on our binded port.
+    	const response = await fetch('http://localhost:3000/money_goal_and_date', {
+				method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+				// We want to send some JSON.
+        body: JSON.stringify({ money_goal: textAnswer, date: dateAnswer }),
+    	});
+    		const data = await response.text();
+				console.log(data);
+        console.log('[BACKEND]: Money client is lying about saving: '+ textAnswer);
+        console.log('[BACKEND]: Date Client is lying about holding themselves to: '+ dateAnswer);
+			};
+
 
     return (
         <div className={styles.container}>
-            <img src= {brand_logo} 
-            className ={styles.logo} 
+            <img src= {brand_logo}
+            className ={styles.logo}
             alt="logo icon"/>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <div>
                     <label className={styles.subtitle} htmlFor="textQuestion">How much are you pretending to save this time?</label>
                     <input
                         type="text"
-                        placeholder='$$$'
-                        value={textAnswer}
+												id="textQuestion"
+                        placeholder='$0'
+                        value={textAnswer.replace('$', '')}
                         onChange={handleTextChange}
                         className={styles.input}
                     />

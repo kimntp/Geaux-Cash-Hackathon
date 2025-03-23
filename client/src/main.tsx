@@ -21,7 +21,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	    <Home/>
 		<SignUp/>
 		<QuestPage/>
-		{/* <BasicExample/>
+		{
+			/* everything below is for messing with other features */
+		/* <BasicExample/>
 		<TypesExample/>
 		<CloseButtonExample />
 		<DropdownExample />
