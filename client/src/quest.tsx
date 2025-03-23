@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styles from "./quest.module.css";
+import { useNavigate } from "react-router-dom";
 
 const QuestPage: React.FC = () => {
+    const navigate = useNavigate();
     const [textAnswer, setTextAnswer] = useState('');
     const [dateAnswer, setDateAnswer] = useState('');
 
@@ -61,7 +63,8 @@ const QuestPage: React.FC = () => {
                         className={styles.input}
                     />
                 </div>
-                <button type="submit" className={styles.button}>Submit</button>
+                <button type="submit" className={styles.button} onClick={() => navigate("/prog")}>Submit</button>
+                
             </form>
         </div>
     );
