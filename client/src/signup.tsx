@@ -18,7 +18,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id ="signup">
       <h1 className={styles.title}>Let’s get this over with.</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input

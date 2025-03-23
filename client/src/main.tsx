@@ -14,12 +14,14 @@ import TabsExample from "./tabs";
 import ToastExample from "./toasts";
 import Home from "./Home";
 import SignUp from "./signup";
+import QuestPage from "./quest";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode
-	>
-    <Home/>
-		<BasicExample/>
+  <React.StrictMode>
+	    <Home/>
+		<SignUp/>
+		<QuestPage/>
+		{/* <BasicExample/>
 		<TypesExample/>
 		<CloseButtonExample />
 		<DropdownExample />
@@ -28,7 +30,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 		<SpinnerExample />
 		<TableExample />
 		<TabsExample />
-		<ToastExample />
-		<SignUp/>
+		<ToastExample /> */}
+
   </React.StrictMode>
 );

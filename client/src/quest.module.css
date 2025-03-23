@@ -6,22 +6,28 @@
     margin: auto;
     border-radius: 8px;
   }
-  
   .title {
-    font-size: 30px;
-    width: 350px;
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #45795d;
+    margin-bottom: 20px;
+  }
+  .subtitle {
+    font-size: 26px;
     font-weight: bold;
     color: #494442;
-    margin-bottom: 30px;
-    margin-top: 150px;
+    margin-bottom: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
   }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  .logo {
+    display: block;
+  margin: 0 auto; /* Centers the image */
+  width: 225px; /* Adjust as needed */
+  height: auto;
+  margin-bottom: 50px;
   }
-  
   .input {
     width: 100%;
     padding: 12px;
@@ -31,9 +37,8 @@
     background-color: #fff;
     color: #333;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
+    margin-bottom: 100px;
   }
-  
   .input::placeholder {
     color: #999;
   }
@@ -42,15 +47,9 @@
     background-color: #494442;
     color: white;
     font-size: 16px;
-    font-weight: bold;
     padding: 12px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin-top: 35px;
-  }
-  
-  .button:hover {
-    background-color: #555;
-  }
-  
+    margin-top: 10px;
+    width: 100%;}

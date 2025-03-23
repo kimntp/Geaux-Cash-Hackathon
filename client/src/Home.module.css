@@ -1,25 +1,45 @@
-.container{
+.container {
   background-color: #E4E6D9;
   padding: 40px;
-  max-width: auto;
+  max-width: 390px;
+  height: 844px;
   margin: auto;
   border-radius: 8px;
 }
  
  .logo {
     display: block;
-  margin: 0 auto; /* Centers the image */
-  width: 700px; /* Adjust as needed */
+  margin-top: 200px; /* Centers the image */
+  width: 100%; /* Adjust as needed */
   height: auto;
-   
+  margin-bottom: 150px;
+
   }
   .mainText{
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
+    font-size: 28px;
+    font-weight: bold;
     color: #494442;
-    font-size: 25px;
-    }
+    margin-bottom: 15px;
+    margin-left: -10px;
+    width: 350px;
+  }
     .subText{
-    font-family: "Roboto";
-    color: black;
-    font-size: 20px;
+      font-size: 16px;
+      color: #494442;
+      margin-bottom: 15px;
+      margin-left: -10px;
+      width: 350px;
+    }
+    .button {
+      background-color: #494442;
+      color: white;
+      font-size: 16px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-left: -10px;
+      width: 105%;
     }
